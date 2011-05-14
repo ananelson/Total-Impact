@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 
+### @export "imports"
 import urllib2
 import re
 import urllib
 from optparse import OptionParser
-# import parser libraries you need for scraping/obtaining data 
+### @end
+# import parser libraries you need for scraping/obtaining data
 
+### @export "data-source"
 BASE_DATA_URL = "http://urlforyourdatasource.com/%s"
 ID_PATTERN = re.compile("REGEX-FOR-CHECK", re.DOTALL | re.IGNORECASE)
 
+### @export "run-plugin"
 def run_plugin(id):
     """Central coordination routine for the plugin"""
 
@@ -22,7 +26,7 @@ def run_plugin(id):
         response = None
     return(response)
 
-
+### @export "get-data-from-source"
 def get_data_from_source(id):
     """Obtain page from the data source for the item identified by id"""
 
@@ -40,6 +44,7 @@ def get_data_from_source(id):
             raise    
     return(page)  
 
+### @export "get-stats"
 def get_stats(page):
     """Routine for getting the desired data out of the returned page"""
 
@@ -63,7 +68,7 @@ def get_stats(page):
         
 
 
-
+### @export "main"
 def main():
     parser = OptionParser(usage="usage: %prog [options] filename",
                           version="%prog 1.0")
@@ -73,7 +78,7 @@ def main():
         parser.error("wrong number of arguments")
 
     id = args[0]
-    
+
     response = run_plugin(id)
     return(response)
 
